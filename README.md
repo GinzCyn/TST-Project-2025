@@ -1,14 +1,11 @@
 # Ternary Search Tree Implementation
 
-A Python implementation of a Ternary Search Tree (TST) data structure. TSTs are efficient for storing and retrieving strings, combining the time efficiency of tries with the space efficiency of binary search trees.
+A Python implementation of a Ternary Search Tree (TST) data structure.
 
 ## Features
 
 - String insertion
 - Exact string search
-- Prefix search
-- String enumeration
-- Word count functionality
 
 ## Usage
 
@@ -20,16 +17,17 @@ tst = TernarySearchTree()
 tst.insert("cat")
 tst.insert("cats")
 tst.insert("bug")
+tst.insert("up")
 
 # Search for words
 print(tst.search("cat", exact=True))  # True
 print(tst.search("ca", exact=False))  # True (prefix search)
 
 # Get all strings
-print(tst.all_strings())  # ['bug', 'cat', 'cats']
+print(tst.all_strings())  # ['bug', 'cat', 'cats', 'up']
 
 # Get total word count
-print(len(tst))  # 3
+print(len(tst))  # 4
 ```
 
 ## Implementation Details
@@ -49,10 +47,5 @@ The implementation uses two main classes:
 
 ## Time Complexity
 
-- Insertion: O(L) where L is the length of the string
-- Search: O(L) for both exact and prefix search
-- Space Complexity: O(n) where n is the total number of characters in all strings
+## Space Complexity
 
-## License
-
-This project is open source and available under the MIT License.
