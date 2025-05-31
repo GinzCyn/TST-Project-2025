@@ -166,3 +166,84 @@ print('Display the tree again.\n')
 print('Tree length: ' + str(len(tst)))
 print(tst)
 print('Tree content: ' + str(tst.all_strings()))
+
+# Testing
+print('###########################################################################')
+print('Testing the Ternary Search Tree implementation with the provided sample data.')
+print('###########################################################################\n')
+# The file `data/search_trees/insert_words.txt` contains words that we can insert into a tree.
+print('Create a new empty ternery search tree.')
+tst = TernarySearchTree()
+print('Insert words from the file `data/search_trees/insert_words.txt` into the tree.')
+with open('data/search_trees/insert_words.txt') as file:
+    words = [
+        line.strip() for line in file
+    ]
+
+for word in words:
+    tst.insert(word)
+unique_words = set(words)
+print(f'Inserted {len(unique_words)} unique words into the tree.')
+# Verify the length of the data stucture.
+print('Verify that the tree contains as many words. No error should be thrown.')
+assert len(tst) == len(unique_words), \
+       f'{len(tst)} in tree, expected {len(unique_words)}'
+
+
+# Verify that all words that were inserted can be found.
+print('Verify that all words that were inserted can be found.')
+print('Inserted words: ' + str(unique_words))
+print('Tree content: ' + str(tst.all_strings()))
+print('Search for the word "bomb". It should be found.')
+print('Result: ' + str(tst.search("bomb")))
+print('Verify that all unique words are found in the tree. No error should be thrown.')
+for word in unique_words:
+    assert tst.search(word), f'{word} not found'
+
+
+# Verify that all prefixes can be found.
+print('Verify that all prefixes can be found. No error should be thrown.')
+for word in unique_words:
+    for i in range(len(word) - 1, 0, -1):
+        prefix = word[:i]
+        assert tst.search(prefix), f'{prefix} not found'
+
+
+# Chack that when searching for a exact match, only the inserted words are found, and no prefixes.
+print('Check that when searching for an exact match, only the inserted words are found, and no prefixes. No error should be thrown.')
+for word in unique_words:
+    for i in range(len(word), 0, -1):
+        prefix = word[:i]
+        if prefix not in unique_words:
+            assert not tst.search(prefix, exact=True), \
+                   f'{prefix} found'
+
+
+# Check that the empty string is in the tree (since it is a prefix of any string).
+print('Verify that the empty string is in the tree (since it is a prefix of any string). No error should be thrown.')
+assert tst.search(''), 'empty string not found'
+
+
+# Check that the empty string is not in the tree for an exact search.
+print('Check that the empty string is not in the tree for an exact search. No error should be thrown.')
+assert not tst.search('', exact=True), 'empty string found'
+
+
+# Check that words in the file `data/search_trees/not_insert_words.txt` can not be found in the tree.
+print('Check that words in the file `data/search_trees/not_insert_words.txt` can not be found in the tree. No error should be thrown.')
+with open('data/search_trees/not_insert_words.txt') as file:
+    for line in file:
+        word = line.strip()
+        assert not tst.search(word), f'{word} should not be found'
+
+
+# Check that all strings are returned.
+print('Check that all strings are returned.')
+all_strings = tst.all_strings()
+print('Number of all strings in the tree: ' + str(len(all_strings)))
+
+assert len(all_strings) == len(unique_words), \
+       f'{len(all_strings)} words, expected {len(unique_words)}'
+assert sorted(all_strings) == sorted(unique_words), 'words do not match'
+print('All strings match the inserted words. No error should be thrown.')
+# If not output was generated, all tests have passed.
