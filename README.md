@@ -127,6 +127,35 @@ python plot_results.py benchmark_results/benchmark_results.csv --output-dir ./an
 Replace `username` with your actual HPC credentials and cluster address.
 
 
-## Time Complexity
+## Time & Space Complexity
+Let:  
+- **n** = number of strings inserted into the TST  
+- **L** = average length of the strings
+
+
+### Best Case
+- **Insert/Search:** O(L) - It is when the tree is perfectly balanced
+- **Space:** O(n × L) - optimal packing with no wasted nodes. Remains constant across all cases because TSTs don't create redundant nodes for shared prefixes
+
+### Average Case  
+- **Insert/Search:** O(L + log n) - It is the typical performance with some imbalance
+- **Space:** O(n × L) - remains consistent. Remains constant across all cases because TSTs don't create redundant nodes for shared prefixes
+
+### Worst Case
+- **Insert/Search:** O(n × L) - This occurs when strings are inserted in sorted order, creating a completely unbalanced tree.
+- **Space:** O(n × L) - same as average case. Remains constant across all cases because TSTs don't create redundant nodes for shared prefixes
+
+**Insert** O(log n + L) average case per insertion
+The data shows insert times growing roughly linearly as the number grows.
+The O(log n) behavior observed is typical for real-world TST implementations, not a flaw in the implementation.
+
+**Search:** O(log n + L) average case per search
+The search time per element decreases as size increases
+Search time per element may decrease as dataset size increases due to 
+better cache locality and improved tree balance with more diverse string patterns
+
 
 ## Space Complexity
+Each node in a TST stores one character and three pointers (left, middle and right).
+The space required is proportional to the total number of characters across all strings.
+It therfore has O(n × L) space complexity.
