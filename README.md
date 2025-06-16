@@ -88,20 +88,13 @@ sbatch run_benchmark.slurm
 squeue -u username
 ```
 
-7. Collect Results:
+7. Collect & Plot Results:
 ```bash
 python collect_results.py benchmark_results
 ```
 
 8. After completion, copy results back (from local machine):
-```bash
-scp -r username@login.hpc.kuleuven.be:~/projects/TST-Project-2025/benchmark_results.csv ./
-```
 
-9. Plot the results on matplotlib
-```bash
-python plot_results.py benchmark_results/benchmark_results.csv --output-dir ./analysis
-```
 
 Replace `username` with your actual HPC credentials and cluster address.
 
