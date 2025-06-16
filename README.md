@@ -83,39 +83,18 @@ dos2unix run_benchmark.slurm
 sbatch run_benchmark.slurm
 ```
 
-6. Run the benchmark:
-```bash
-python performance_test.py --sizes 1000 5000 10000 --output-dir benchmark_results --word-file data/search_trees/corncob_lowercase.txt --runs 5
-```
-
-Deactivate:
-```bash
-deactivate
-```
-
-7. Monitor job status:
+6. Monitor job status:
 ```bash
 squeue -u username
 ```
 
-Collect Results:
+7. Collect Results:
 ```bash
-source ~/venvs/benchmark_env/bin/activate
-
-python performance_test.py --size 1000 --output-dir benchmark_results
-python performance_test.py --size 5000 --output-dir benchmark_results
-python performance_test.py --size 10000 --output-dir benchmark_results
 python collect_results.py benchmark_results
 ```
 
 8. After completion, copy results back (from local machine):
 ```bash
-python performance_test.py --size 1000 --output-dir benchmark_results
-python performance_test.py --size 5000 --output-dir benchmark_results
-python performance_test.py --size 10000 --output-dir benchmark_results
-
-python collect_results.py benchmark_results
-
 scp -r username@login.hpc.kuleuven.be:~/projects/TST-Project-2025/benchmark_results.csv ./
 ```
 
