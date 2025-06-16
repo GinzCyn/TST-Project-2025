@@ -1,0 +1,9 @@
+==================================================
+PERFORMANCE SUMMARY
+==================================================
+Size    100: Insert 0.001624s, Search 0.000453s
+Size    500: Insert 0.004621s, Search 0.002367s
+Size   1000: Insert 0.010529s, Search 0.005292s
+Size   5000: Insert 0.046024s, Search 0.029098s
+Size  10000: Insert 0.104757s, Search 0.061203s
+Size  50000: Insert 0.551811s, Search 0.377389s
